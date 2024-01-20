@@ -1,0 +1,59 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id String @id @default(cuid())
+  avatar String
+  address String
+  phoneNumber String
+  userName String
+  orders Order[]
+  email String @unique
+  password String
+  createdAt DateTime @default(now())
+}
+
+model Order {
+  id String @id @default(cuid())
+  productImage String
+  productName String
+  userId String
+  user User @relation(fields: [userId], references: [id])
+  tracking Tracking?
+  categories Category[]
+  description String
+  price Float
+  destination String
+  status String @default("pending")
+  createdAt DateTime @default(now())
+  updatedAt DateTime 
+}
+
+model Category {
+  id String @id @default(cuid())
+  name String
+  orders Order[]
+}
+
+model Tracking {
+  @@map("tracking-info")
+  id String @id @default(cuid())
+  arrivalTime DateTime 
+  orderId String @unique
+  order Order @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  status String? @default("pending")
+  latitude String? @map("lat")
+  longitude String? @map("lng")
+  location String?
+  courier String? @default("Brokang Courier")
+  couriersNumber String?
+}
