@@ -1,3 +1,4 @@
+import { getCardData } from "@/app/lib/prisma";
 import {
   ClockIcon,
   GiftIcon,
@@ -37,5 +38,29 @@ function Cards({
     </div>
   );
 }
+
+export const CardWrapper = async () => {
+  const cardData = await getCardData();
+  return (
+    <>
+      <Cards
+        title="Pending"
+        value={cardData.numberOfOrderPending}
+        type="pending"
+      />
+      <Cards
+        title="On the way"
+        value={cardData.numberOfOrderInTransit}
+        type="on the way"
+      />
+      <Cards
+        title="Delivered"
+        value={cardData.numberOfOderDelivered}
+        type="delivered"
+      />
+      <Cards title="Reviews" value="20" type="reviews" />
+    </>
+  );
+};
 
 export default Cards;

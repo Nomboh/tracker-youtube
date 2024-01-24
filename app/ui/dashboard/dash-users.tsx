@@ -2,9 +2,10 @@ import { users } from "@/app/lib/seed-data";
 import Image from "next/image";
 import React from "react";
 import { formatDate } from "@/app/lib/utils";
+import { getUser } from "@/app/lib/prisma";
 
-function DashUsers() {
-  const dashUsers = users;
+async function DashUsers() {
+  const dashUsers = await getUser();
   return (
     <div className=" w-full h-full bg-indigo-200 rounded-md p-2">
       {/* desktop */}

@@ -3,9 +3,11 @@ import Image from "next/image";
 import React from "react";
 import OrderStatus from "../components/order-status";
 import { formatDate } from "@/app/lib/utils";
+import { getLastFiveOrders } from "@/app/lib/prisma";
 
-function LatestOrders() {
-  const latestOrders = orders.slice(0, 5);
+async function LatestOrders() {
+  const latestOrders = await getLastFiveOrders();
+
   return (
     <div className=" w-full h-full bg-indigo-200 rounded-md p-2">
       {/* desktop */}
