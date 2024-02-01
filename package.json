@@ -12,17 +12,22 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@googlemaps/js-api-loader": "^1.16.2",
     "@heroicons/react": "^2.1.1",
     "@prisma/client": "^5.8.1",
     "@types/bcryptjs": "^2.4.6",
     "bcryptjs": "^2.4.3",
+    "cloudinary": "^1.41.3",
     "clsx": "^2.1.0",
     "next": "14.0.4",
     "react": "^18",
     "react-dom": "^18",
-    "recharts": "^2.10.4"
+    "recharts": "^2.10.4",
+    "use-places-autocomplete": "^4.0.1",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
+    "@types/google.maps": "^3.55.1",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
