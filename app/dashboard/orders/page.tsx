@@ -1,10 +1,11 @@
-import { getOrders, getOrdersCount } from "@/app/lib/prisma";
+import { getOrdersCount } from "@/app/lib/prisma";
 import Upbar from "@/app/ui/components/upbar";
 import OrderLinks from "@/app/ui/orders/order-links";
 import Pagination from "@/app/ui/orders/pagination";
 import SearchOrders from "@/app/ui/orders/search-orders";
 import Table from "@/app/ui/orders/table";
-import React from "react";
+import { OrderListSkeleton } from "@/app/ui/skeletons";
+import React, { Suspense } from "react";
 
 async function Orders({
   searchParams,
@@ -17,7 +18,6 @@ async function Orders({
   const query = searchParams?.search || "";
   const page = Number(searchParams?.page) || 1;
 
-  console.log(page);
   const ordersCount = await getOrdersCount(query);
   return (
     <div className=" w-full overflow-hidden h-full">
@@ -34,7 +34,9 @@ async function Orders({
 
       <OrderLinks />
 
-      <Table query={query} page={page} />
+      <Suspense fallback={<OrderListSkeleton />}>
+        <Table query={query} page={page} />
+      </Suspense>
 
       <Pagination orderCount={ordersCount} />
     </div>

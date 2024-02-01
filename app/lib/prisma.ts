@@ -11,7 +11,7 @@ export const prisma = new PrismaClient();
 export async function getLastFiveOrders() {
   noStore();
   try {
-    await new Promise(resolve => setTimeout(resolve, 6000));
+    // await new Promise(resolve => setTimeout(resolve, 6000));
     return await prisma.order.findMany({
       orderBy: {
         updatedAt: "desc",
