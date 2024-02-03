@@ -10,6 +10,12 @@ import {
   LatestOrdersSkeleton,
   OrderDetailSkeleton,
 } from "../../ui/skeletons";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Dashboard",
+  description: "Dashboard page for all orders and users",
+};
 
 async function Dashboard() {
   const chartData = await getChartData();

@@ -13,8 +13,6 @@ function OrderCreate() {
     message: null,
   });
 
-  const status = useFormStatus();
-
   return (
     <form
       action={dispatch}
@@ -85,9 +83,8 @@ function OrderCreate() {
             Cancel
           </Link>
           <Button
-            className=" disabled:opacity-50 text-xl border-indigo-500 hover:border-indigo-300"
+            className=" text-xl border-indigo-500 hover:border-indigo-300"
             type="submit"
-            disabled={status.pending}
           >
             Create Order
           </Button>

@@ -2,6 +2,12 @@ import Image from "next/image";
 import { poppins } from "./lib/font";
 import Hero from "../public/hero.jpg";
 import Link from "next/link";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Home",
+  description: "Welcome to Tracker",
+};
 
 export default function Home() {
   return (

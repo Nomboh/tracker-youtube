@@ -3,6 +3,12 @@ import Breadcrumb from "@/app/ui/components/breadcrumb";
 
 import Upbar from "@/app/ui/components/upbar";
 import OrderCreate from "@/app/ui/orders/order-create";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Create Order",
+  description: "Create a new order for a customer",
+};
 
 function CreateOrder() {
   return (

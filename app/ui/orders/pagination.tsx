@@ -8,7 +8,7 @@ function Pagination({ orderCount }: { orderCount: number }) {
   const searchParams = useSearchParams();
   const router = useRouter();
 
-  const pageNum = Number(searchParams.get("page"));
+  const pageNum = Number(searchParams.get("page") ?? "1");
 
   const totalPages = Math.ceil(orderCount / 10);
 

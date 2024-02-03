@@ -73,7 +73,11 @@ export async function createOrder(
   const file = formData.get("image") as File;
   const arrayBuffer = await file.arrayBuffer();
   const imageBuffer = Buffer.from(arrayBuffer).toString("base64");
-  const image = await uploadImage(imageBuffer, file.type);
+
+  let image = "";
+  if (imageBuffer) {
+    image = await uploadImage(imageBuffer, file.type);
+  }
 
   const orderData = {
     productName: formData.get("productName") as string,
@@ -105,6 +109,39 @@ export async function createOrder(
   } catch (error) {
     console.log(error);
     throw new Error("Error creating order");
+  }
+
+  revalidatePath("/dashboard/orders");
+  redirect("/dashboard/orders");
+}
+
+export async function updateOrder(id: string, formData: FormData) {
+  const orderData = {
+    location: formData.get("location") as string,
+    arrivalTime: new Date(formData.get("arrivalTime") as string),
+    status: formData.get("status") as string,
+    latitude: formData.get("latitude") as string,
+    longitude: formData.get("longitude") as string,
+    courier: formData.get("courier") as string,
+    couriersNumber: formData.get("courierNumber") as string,
+  };
+
+  try {
+    await prisma.order.update({
+      where: {
+        id,
+      },
+      data: {
+        status: orderData.status,
+        tracking: {
+          update: {
+            ...orderData,
+          },
+        },
+      },
+    });
+  } catch (error) {
+    return { message: "Error updating order" };
   }
 
   revalidatePath("/dashboard/orders");
