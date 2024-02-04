@@ -4,6 +4,8 @@ import { prisma } from "./prisma";
 import { z } from "zod";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import { AuthError } from "next-auth";
+import { signIn } from "@/auth";
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -67,13 +69,18 @@ async function uploadImage(imageBuffer: string, mimeType: string) {
 }
 
 export async function createOrder(
+  id: string,
   prevState: State | undefined,
   formData: FormData
 ): Promise<State | undefined> {
   const file = formData.get("image") as File;
   const arrayBuffer = await file.arrayBuffer();
   const imageBuffer = Buffer.from(arrayBuffer).toString("base64");
-  const image = await uploadImage(imageBuffer, file.type);
+
+  let image = "";
+  if (imageBuffer) {
+    image = await uploadImage(imageBuffer, file.type);
+  }
 
   const orderData = {
     productName: formData.get("productName") as string,
@@ -81,7 +88,7 @@ export async function createOrder(
     destination: formData.get("destination") as string,
     description: formData.get("description") as string,
     price: Number(formData.get("price")),
-    userId: "1",
+    userId: id,
   };
 
   const validatedOrderData = orderSchema.safeParse(orderData);
@@ -109,4 +116,72 @@ export async function createOrder(
 
   revalidatePath("/dashboard/orders");
   redirect("/dashboard/orders");
+}
+
+export async function updateOrder(id: string, formData: FormData) {
+  const orderData = {
+    location: formData.get("location") as string,
+    arrivalTime: new Date(formData.get("arrivalTime") as string),
+    status: formData.get("status") as string,
+    latitude: formData.get("latitude") as string,
+    longitude: formData.get("longitude") as string,
+    courier: formData.get("courier") as string,
+    couriersNumber: formData.get("courierNumber") as string,
+  };
+
+  try {
+    await prisma.order.update({
+      where: {
+        id,
+      },
+      data: {
+        status: orderData.status,
+        tracking: {
+          update: {
+            ...orderData,
+          },
+        },
+      },
+    });
+  } catch (error) {
+    return { message: "Error updating order" };
+  }
+
+  revalidatePath("/dashboard/orders");
+  redirect("/dashboard/orders");
+}
+
+export async function deleteOrder(id: string) {
+  try {
+    await prisma.order.delete({
+      where: {
+        id,
+      },
+    });
+  } catch (error) {
+    return { message: "Error deleting order" };
+  }
+
+  revalidatePath("/dashboard/orders");
+}
+
+export async function authenticateUser(
+  prevState: string | undefined,
+  formData: FormData
+) {
+  try {
+    await signIn("credentials", formData);
+  } catch (error) {
+    if (error instanceof AuthError) {
+      switch (error.type) {
+        case "CredentialsSignin":
+          return "Invalid credentials";
+
+        default:
+          return "Error signing in";
+      }
+    }
+
+    throw error;
+  }
 }

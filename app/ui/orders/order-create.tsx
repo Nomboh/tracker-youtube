@@ -5,15 +5,14 @@ import Link from "next/link";
 import InputGroup from "../components/Input-group";
 import { createOrder } from "@/app/lib/actions";
 import PlacesSearch from "../components/places-search";
-import { useFormState, useFormStatus } from "react-dom";
+import { useFormState } from "react-dom";
 
-function OrderCreate() {
-  const [state, dispatch] = useFormState(createOrder, {
+function OrderCreate({ id }: { id: string }) {
+  const createOrderBind = createOrder.bind(null, id);
+  const [state, dispatch] = useFormState(createOrderBind, {
     errors: {},
     message: null,
   });
-
-  const status = useFormStatus();
 
   return (
     <form
@@ -85,9 +84,8 @@ function OrderCreate() {
             Cancel
           </Link>
           <Button
-            className=" disabled:opacity-50 text-xl border-indigo-500 hover:border-indigo-300"
+            className=" text-xl border-indigo-500 hover:border-indigo-300"
             type="submit"
-            disabled={status.pending}
           >
             Create Order
           </Button>

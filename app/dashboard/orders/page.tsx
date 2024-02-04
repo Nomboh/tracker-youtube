@@ -1,3 +1,5 @@
+import React, { Suspense } from "react";
+import { Metadata } from "next";
 import { getOrdersCount } from "@/app/lib/prisma";
 import Upbar from "@/app/ui/components/upbar";
 import OrderLinks from "@/app/ui/orders/order-links";
@@ -5,7 +7,11 @@ import Pagination from "@/app/ui/orders/pagination";
 import SearchOrders from "@/app/ui/orders/search-orders";
 import Table from "@/app/ui/orders/table";
 import { OrderListSkeleton } from "@/app/ui/skeletons";
-import React, { Suspense } from "react";
+
+export const metadata: Metadata = {
+  title: "Orders",
+  description: "Orders page for all orders",
+};
 
 async function Orders({
   searchParams,

@@ -165,3 +165,19 @@ export async function getOrdersCount(search: string) {
     throw new Error("Error getting orders count");
   }
 }
+
+export async function getTrackingInfo(id: string) {
+  try {
+    return await prisma.tracking.findFirst({
+      where: {
+        orderId: id,
+      },
+      include: {
+        order: true,
+      },
+    });
+  } catch (error) {
+    console.log(error);
+    throw new Error("Error getting order by id");
+  }
+}

@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import clsx from "clsx";
 import { Loader } from "@googlemaps/js-api-loader";
 import usePlacesAutocomplete, {
@@ -17,6 +17,12 @@ interface InputGroupProps extends React.InputHTMLAttributes<HTMLInputElement> {
   className?: React.HTMLAttributes<HTMLDivElement>["className"];
   error?: string[] | undefined;
 }
+
+export const loader = new Loader({
+  apiKey: process.env.NEXT_PUBLIC_GOOGLE_API_KEY as string,
+  version: "weekly",
+  libraries: ["places", "maps", "marker"],
+});
 
 function PlacesSearch({
   children,
@@ -41,22 +47,19 @@ function PlacesSearch({
   } = usePlacesAutocomplete({
     debounce: 300,
     defaultValue,
+    initOnMount: false,
   });
 
-  const loader = new Loader({
-    apiKey: process.env.NEXT_PUBLIC_GOOGLE_API_KEY as string,
-    version: "weekly",
-    libraries: ["places"],
-  });
-
-  loader
-    .importLibrary("places")
-    .then(() => {
-      init();
-    })
-    .catch(err => {
-      console.error(err);
-    });
+  useEffect(() => {
+    loader
+      .importLibrary("places")
+      .then(() => {
+        init();
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  }, []);
 
   const handleSelect = ({
     description,

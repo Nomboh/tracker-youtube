@@ -5,8 +5,13 @@ import "./globals.css";
 const lato = Lato({ subsets: ["latin"], weight: ["400", "700"] });
 
 export const metadata: Metadata = {
-  title: "Tracker",
+  title: {
+    template: "%s | Tracker",
+    default: "Tracker",
+  },
   description: "Track any thing at any time",
+  keywords: ["tracker", "track", "time", "location"],
+  category: "Productivity",
 };
 
 export default function RootLayout({

@@ -316,6 +316,7 @@ export const orderInfo = [
     courier: "Jannie",
     couriersNumber: "279.450.8850 x19920",
     location: "Augusta-Richmond County",
+    status: "pending",
   },
   {
     id: "clqfaagy800018y23huam5l5b",
@@ -326,6 +327,7 @@ export const orderInfo = [
     courier: "Samantha",
     couriersNumber: "648.457.0268 x398",
     location: "Hilo",
+    status: "pending",
   },
   {
     id: "clqfaagy800028y23iiuex4aw",
@@ -336,6 +338,7 @@ export const orderInfo = [
     courier: "Erna",
     couriersNumber: "972-761-6272 x93654",
     location: "Long Beach",
+    status: "on the way",
   },
   {
     id: "clqfaagy800038y23wx5lxbo4",
@@ -346,6 +349,7 @@ export const orderInfo = [
     courier: "Emmitt",
     couriersNumber: "780-335-2290",
     location: "West Sacramento",
+    status: "delivered",
   },
   {
     id: "clqfaagy800048y23ihsx9803",
@@ -356,6 +360,7 @@ export const orderInfo = [
     courier: "Gunner",
     couriersNumber: "439-658-7579 x18572",
     location: "Livermore",
+    status: "delivered",
   },
   {
     id: "clqfaagy900058y232gs67d95",
@@ -366,6 +371,7 @@ export const orderInfo = [
     courier: "Candace",
     couriersNumber: "867-553-3696 x91017",
     location: "Chico",
+    status: "delivered",
   },
   {
     id: "clqfaagy900068y2355gfimfr",
@@ -376,6 +382,7 @@ export const orderInfo = [
     courier: "Murphy",
     couriersNumber: "(203) 524-5180 x116",
     location: "Lodi",
+    status: "on the way",
   },
   {
     id: "clqfaagy900078y23xgm1qn1t",
@@ -386,6 +393,7 @@ export const orderInfo = [
     courier: "Noemy",
     couriersNumber: "1-535-467-5400",
     location: "Carolina",
+    status: "on the way",
   },
   {
     id: "clqfaagy900088y23v95wr5yk",
@@ -396,6 +404,7 @@ export const orderInfo = [
     courier: "Kara",
     couriersNumber: "(846) 994-6372",
     location: "Tamiami",
+    status: "delivered",
   },
   {
     id: "clqfaagy900098y23nvopn2sr",
@@ -406,6 +415,7 @@ export const orderInfo = [
     courier: "Jaiden",
     couriersNumber: "270-503-0345 x56557",
     location: "Syracuse",
+    status: "delivered",
   },
   {
     id: "clqfaagy9000a8y23y84pb2h7",
@@ -416,6 +426,7 @@ export const orderInfo = [
     courier: "Barton",
     couriersNumber: "1-986-973-9139 x1162",
     location: "Macon-Bibb County",
+    status: "pending",
   },
   {
     id: "clqfaagy9000b8y23ebj9j3yk",
@@ -426,6 +437,7 @@ export const orderInfo = [
     courier: "Raina",
     couriersNumber: "1-329-714-3181",
     location: "St. Paul",
+    status: "pending",
   },
   {
     id: "clqfaagy9000c8y23el6gvvg3",
@@ -436,6 +448,7 @@ export const orderInfo = [
     courier: "Spencer",
     couriersNumber: "(274) 320-1807 x4706",
     location: "Whittier",
+    status: "on the way",
   },
   {
     id: "clqfaagy9000d8y23qbe75te9",
@@ -446,6 +459,7 @@ export const orderInfo = [
     courier: "Keon",
     couriersNumber: "(808) 639-2359 x305",
     location: "Belleville",
+    status: "on the way",
   },
   {
     id: "clqfaagy9000e8y23ti6ioed2",
@@ -456,6 +470,7 @@ export const orderInfo = [
     courier: "Prince",
     couriersNumber: "973-974-6987 x28555",
     location: "South Bend",
+    status: "delivered",
   },
   {
     id: "clqfaagy9000f8y23p5vd2ow5",
@@ -466,6 +481,7 @@ export const orderInfo = [
     courier: "Jeremie",
     couriersNumber: "217-417-0171 x965",
     location: "Coral Springs",
+    status: "pending",
   },
   {
     id: "clqfaagy9000g8y236tdk2x7l",
@@ -476,6 +492,7 @@ export const orderInfo = [
     courier: "Alfonso",
     couriersNumber: "561-711-9217 x0838",
     location: "Trujillo Alto",
+    status: "pending",
   },
   {
     id: "clqfaagy9000h8y237n0p4a2o",
@@ -486,6 +503,7 @@ export const orderInfo = [
     courier: "Oliver",
     couriersNumber: "846-575-4649",
     location: "Hampton",
+    status: "on the way",
   },
   {
     id: "clqfaagy9000i8y23jvpgvs8s",
@@ -496,6 +514,7 @@ export const orderInfo = [
     courier: "Carlee",
     couriersNumber: "381.875.7757",
     location: "Inglewood",
+    status: "delivered",
   },
   {
     id: "clqfaagy9000j8y23t9ls3n4u",
@@ -506,5 +525,6 @@ export const orderInfo = [
     courier: "Soledad",
     couriersNumber: "(885) 592-3365 x97781",
     location: "Novato",
+    status: "delivered",
   },
 ];

@@ -24,7 +24,9 @@ async function LatestOrders() {
           <tbody className=" bg-white overflow-hidden rounded-md">
             {latestOrders.map(order => (
               <tr key={order.id} className=" border-b-2 border-indigo-300">
-                <td className=" px-6 py-3 whitespace-nowrap ">{order.id}</td>
+                <td className=" px-6 py-3 whitespace-nowrap ">
+                  {order.id.slice(0, 13)}
+                </td>
                 <td className=" px-6 py-3 whitespace-nowrap ">
                   <div className=" flex items-center">
                     <Image
