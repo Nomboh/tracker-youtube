@@ -8,8 +8,11 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import NavLinks from "./nav-links";
+import { auth, signOut } from "../../../auth";
 
-function Sidebar() {
+async function Sidebar() {
+  const authUser = await auth();
+
   return (
     <div className=" bg-indigo-500 w-full flex flex-col h-screen py-2 p-3">
       <Link
@@ -35,7 +38,14 @@ function Sidebar() {
         </p>
       </Link>
 
-      <form className=" h-16 hover:bg-indigo-50 hover:pl-2 rounded-md flex items-center gap-3">
+      <form
+        action={async () => {
+          "use server";
+
+          await signOut();
+        }}
+        className=" h-16 hover:bg-indigo-50 hover:pl-2 rounded-md flex items-center gap-3"
+      >
         <button className=" outline-none flex items-center gap-3 justify-start">
           <ArrowLeftEndOnRectangleIcon className=" text-indigo-400 h-6 w-6" />
           <p
@@ -53,13 +63,13 @@ function Sidebar() {
           className="rounded-full w-auto h-auto"
           width={30}
           height={30}
-          alt="profile picture"
-          src={`https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D`}
+          alt={authUser?.user?.name!}
+          src={authUser?.user?.image!}
         />
         <p
           className={clsx(`text-xl text-indigo-400 font-bold hidden md:block`)}
         >
-          Profile
+          {authUser?.user?.name}
         </p>
       </div>
     </div>

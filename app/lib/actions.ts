@@ -4,6 +4,8 @@ import { prisma } from "./prisma";
 import { z } from "zod";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import { AuthError } from "next-auth";
+import { signIn } from "@/auth";
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -67,6 +69,7 @@ async function uploadImage(imageBuffer: string, mimeType: string) {
 }
 
 export async function createOrder(
+  id: string,
   prevState: State | undefined,
   formData: FormData
 ): Promise<State | undefined> {
@@ -85,7 +88,7 @@ export async function createOrder(
     destination: formData.get("destination") as string,
     description: formData.get("description") as string,
     price: Number(formData.get("price")),
-    userId: "1",
+    userId: id,
   };
 
   const validatedOrderData = orderSchema.safeParse(orderData);
@@ -146,4 +149,39 @@ export async function updateOrder(id: string, formData: FormData) {
 
   revalidatePath("/dashboard/orders");
   redirect("/dashboard/orders");
+}
+
+export async function deleteOrder(id: string) {
+  try {
+    await prisma.order.delete({
+      where: {
+        id,
+      },
+    });
+  } catch (error) {
+    return { message: "Error deleting order" };
+  }
+
+  revalidatePath("/dashboard/orders");
+}
+
+export async function authenticateUser(
+  prevState: string | undefined,
+  formData: FormData
+) {
+  try {
+    await signIn("credentials", formData);
+  } catch (error) {
+    if (error instanceof AuthError) {
+      switch (error.type) {
+        case "CredentialsSignin":
+          return "Invalid credentials";
+
+        default:
+          return "Error signing in";
+      }
+    }
+
+    throw error;
+  }
 }

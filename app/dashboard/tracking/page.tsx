@@ -1,11 +1,16 @@
 import React from "react";
+import dynamic from "next/dynamic";
 import { Metadata } from "next";
 import { getTrackingInfo } from "@/app/lib/prisma";
 import { formatDate } from "@/app/lib/utils";
 import Upbar from "@/app/ui/components/upbar";
-import TrackingMap from "@/app/ui/tracking/map";
+
 import TrackingHistory from "@/app/ui/tracking/tracking-history";
 import TrackingInput from "@/app/ui/tracking/tracking-input";
+
+const TrackingMap = dynamic(() => import("@/app/ui/tracking/map"), {
+  ssr: false,
+});
 
 export const metadata: Metadata = {
   title: "Tracking",

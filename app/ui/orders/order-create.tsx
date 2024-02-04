@@ -5,10 +5,11 @@ import Link from "next/link";
 import InputGroup from "../components/Input-group";
 import { createOrder } from "@/app/lib/actions";
 import PlacesSearch from "../components/places-search";
-import { useFormState, useFormStatus } from "react-dom";
+import { useFormState } from "react-dom";
 
-function OrderCreate() {
-  const [state, dispatch] = useFormState(createOrder, {
+function OrderCreate({ id }: { id: string }) {
+  const createOrderBind = createOrder.bind(null, id);
+  const [state, dispatch] = useFormState(createOrderBind, {
     errors: {},
     message: null,
   });

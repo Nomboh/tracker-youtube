@@ -11,6 +11,7 @@ import {
   OrderDetailSkeleton,
 } from "../../ui/skeletons";
 import { Metadata } from "next";
+import { auth } from "@/auth";
 
 export const metadata: Metadata = {
   title: "Dashboard",
@@ -19,6 +20,8 @@ export const metadata: Metadata = {
 
 async function Dashboard() {
   const chartData = await getChartData();
+  const userInfo = await auth();
+  console.log(userInfo?.user);
   return (
     <main className=" h-screen w-full overflow-auto">
       <Upbar>
