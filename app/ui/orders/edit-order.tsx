@@ -91,7 +91,7 @@ async function OrderEdit({
           type="text"
           defaultValue={orderInfo?.couriersNumber || ""}
         >
-          Courier's Number
+          Couriers Number
         </InputGroup>
 
         <fieldset className=" w-full">

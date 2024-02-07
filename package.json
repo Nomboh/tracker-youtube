@@ -6,6 +6,7 @@
     "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
   },
   "scripts": {
+    "postinstall": "prisma generate",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
@@ -14,7 +15,7 @@
   "dependencies": {
     "@googlemaps/js-api-loader": "^1.16.2",
     "@heroicons/react": "^2.1.1",
-    "@prisma/client": "^5.8.1",
+    "@prisma/client": "^5.9.1",
     "@types/bcryptjs": "^2.4.6",
     "bcryptjs": "^2.4.3",
     "cloudinary": "^1.41.3",
@@ -36,7 +37,7 @@
     "eslint": "^8",
     "eslint-config-next": "14.0.4",
     "postcss": "^8",
-    "prisma": "^5.8.1",
+    "prisma": "^5.9.1",
     "tailwindcss": "^3.3.0",
     "ts-node": "^10.9.2",
     "typescript": "^5"
