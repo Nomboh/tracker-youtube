@@ -4,12 +4,13 @@
 generator client {
   provider = "prisma-client-js"
   previewFeatures = ["fullTextSearch"]
+  
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("POSTGRES_PRISMA_URL")
-  directUrl = env("POSTGRES_URL_NON_POOLING")
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+  relationMode = "prisma"
 }
 
 model User {
